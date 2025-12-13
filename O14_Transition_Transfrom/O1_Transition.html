@@ -1,0 +1,36 @@
+<!-- Basic Transition :- Transitions is a CSS property that allows you to control the speed and timing of CSS property changes 
+                        - It is very useful for creating smooth animations and transitions in web design -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transition in Tailwindcss</title>
+    <link rel="stylesheet" href="../output.css">
+</head>
+<body>
+    <button class="bg-blue-400 p-2 m-10 text-white rounded hover:bg-blue-900">
+        click 1
+    </button>
+    <button class="bg-blue-400 p-2 m-10 text-white rounded hover:bg-blue-900
+        transition duration-3000">
+        click 2
+    </button>
+    <button class="bg-blue-400 p-2 m-10 text-white rounded hover:opacity-10
+    transition duration-1000 ease-in-out">
+        click 3
+    </button>
+    <button class="bg-red-500 p-2 m-10 text-white rounded hover:opacity-10
+    transition duration-1000 ease-in-out">
+        click 3
+    </button>
+    <button class="bg-blue-400 p-2 m-10 text-white rounded hover:opacity-10
+    transition duration-1000 ease-in-out">
+        click 3
+    </button>
+    <button class="bg-blue-400 p-2 m-10 text-white rounded hover:bg-blue-900
+        transition duration-1000 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+        click 4
+    </button>
+</body>
+</html>

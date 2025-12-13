@@ -1,0 +1,52 @@
+<!-- Basic Transition :- Transitions is a CSS property that allows you to control the speed and timing of CSS property changes 
+                        - It is very useful for creating smooth animations and transitions in web design -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transform in Tailwindcss</title>
+    <link rel="stylesheet" href="../output.css">
+    <style>
+        .auto-rotate-y {
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            animation: spinY 4s linear infinite;
+        }
+        @keyframes spinY {
+            from { transform: rotateY(0deg); }
+            to   { transform: rotateY(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <button class="bg-green-400 p-2 m-10 text-white rotate-45 rounded hover:rotate-180">
+        click 1
+    </button>
+    <button class="bg-red-400 p-2 m-10 text-white rounded hover:rotate-180 
+    transition-transform duration-1000">
+        click 2
+    </button>
+    <button class="bg-yellow-400 p-2 m-10 text-white rounded hover:rotate-x-90
+    transition-transform duration-1000 ease-in-out">
+        click 3
+    </button>
+    <button class="bg-purple-500 p-2 m-10 text-white rounded hover:rotate-y-90
+    transition-transform duration-1000 ease-in-out">
+        click 3
+    </button>
+    <button class="bg-blue-400 p-2 m-10 text-white rounded hover:scale-150 
+    transition-transform duration-1000 ease-in-out">
+        click 3
+    </button>
+    <button class="bg-violet-400 p-2 m-10 text-white rounded hover:scale-x-150 hover:scale-y-50
+        transition-transform duration-1000 ease-in-out">
+        click 4
+    </button>
+
+    <img src="../O9_Background/dance.png" class="m-20 w-50 hover:rotate-y-180 
+    transition-transform duration-2000 ease-in-out" alt="">
+
+    <img src="../O9_Background/dance.png" class="m-20 w-50 auto-rotate-y" alt="">
+</body>
+</html>
