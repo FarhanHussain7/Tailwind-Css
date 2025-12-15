@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading bucket</title>
+    <link rel="stylesheet" href="../output.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* drop fall animation */
+        @keyframes fall {
+            0% { transform: translateY(-8rem) scaleY(1); opacity: 0; }
+            50% { opacity: 1; }
+            85% { transform: translateY(0) scaleY(1.05); }
+            100% { transform: translateY(0) scaleY(1); opacity: 1; }
+        }
+        /* small splash */
+        @keyframes splash {
+            0% { transform: scaleY(0.2); opacity: 0.9; }
+            60% { transform: scaleY(1.15); opacity: 0.6; }
+            100% { transform: scaleY(1); opacity: 0; }
+        }
+        .drop { animation: fall 0.7s cubic-bezier(.2,.9,.2,1) forwards; }
+        .splash { animation: splash 420ms ease-out forwards; }
+
+        /* Wave animation: horizontal movement and gentle bob */
+        @keyframes waveMove { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes bob { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-6px);} }
+
+        /* Layered wave animations for flowing effect */
+        .wave1 { width:200%; height:100%; position:absolute; left:0; bottom:0; animation: waveMove 6s linear infinite; opacity:0.95; }
+        .wave2 { width:200%; height:100%; position:absolute; left:0; bottom:0; animation: waveMove 10s linear infinite; opacity:0.8; transform: translateX(-25%); }
+        .wave-bob { animation: bob 3.6s ease-in-out infinite; }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-100 flex items-center justify-center p-6">
+    <div class="max-w-md w-full">
+        <h2 class="text-center text-xl font-semibold text-gray-800 mb-6">Bucket loader — drops collect inside</h2>
+
+        <div class="flex items-end justify-center">
+            <!-- Bucket container -->
+            <div id="bucket" class="relative w-40 h-44 bg-transparent">
+                <!-- bucket lip (front) -->
+                <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 w-40 h-3 bg-gray-700 rounded-t-sm"></div>
+
+                <!-- bucket body (visual) -->
+                <div class="absolute top-0 left-0 right-0 bottom-0 mx-auto w-40 h-40 border-4 border-gray-700 rounded-b-2xl overflow-hidden bg-white">
+                        <!-- water fill (grows upward) with animated wave -->
+                                        <div id="fill" class="absolute left-0 right-0 bottom-0 overflow-hidden" style="height:0%; transition:height 360ms ease-out;">
+                                            <div class="relative w-full h-full">
+                                                <!-- Layered waves for flowing effect -->
+                                                <svg class="fill-svg wave wave1" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+                                                    <path d="M0,30 C150,90 350,0 600,30 C850,60 1050,10 1200,30 L1200,120 L0,120 Z" fill="#3b82f6"></path>
+                                                </svg>
+                                                <svg class="fill-svg wave wave2" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+                                                    <path d="M0,40 C150,100 350,10 600,40 C850,70 1050,20 1200,40 L1200,120 L0,120 Z" fill="#60a5fa" opacity="0.8"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                </div>
+
+                <!-- bucket front shadow to make lip visible -->
+                <div class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-gray-700 rounded-b-lg"></div>
+
+                <!-- drop spawn area (absolute to bucket) -->
+                <div id="drop-area" class="absolute -top-16 left-1/2 transform -translate-x-1/2 w-6 h-12"></div>
+            </div>
+        </div>
+
+        <p class="mt-6 text-center text-sm text-gray-600">Autoplay: drops fall every 800ms and increase bucket fill.</p>
+    </div>
+
+    <script>
+        // Simple autoplay drops that fall into the bucket and increase fill
+        (function(){
+            const dropArea = document.getElementById('drop-area');
+            const fillEl = document.getElementById('fill');
+            let fillPct = 0; // 0..100
+            const increment = 6; // percent per drop
+            let intervalId;
+
+            function createDrop() {
+                const drop = document.createElement('div');
+                drop.className = 'drop w-3 h-6 bg-blue-400 rounded-full absolute left-1/2 transform -translate-x-1/2';
+                // position start above bucket
+                drop.style.top = '-3rem';
+                dropArea.appendChild(drop);
+
+                // when fall animation ends, create splash, increase fill, remove drop
+                drop.addEventListener('animationend', () => {
+                    // create tiny splash
+                    const splash = document.createElement('div');
+                    splash.className = 'splash absolute left-1/2 transform -translate-x-1/2 w-6 h-1 bg-blue-300 rounded-full bottom:0';
+                    // position splash just above bucket's bottom inside the visible area
+                    splash.style.bottom = '0.6rem';
+                    dropArea.appendChild(splash);
+
+                    // remove splash after animation
+                    splash.addEventListener('animationend', () => splash.remove());
+
+                    // increase fill
+                    if (fillPct < 100) {
+                        fillPct = Math.min(100, fillPct + increment);
+                        fillEl.style.height = fillPct + '%';
+                    }
+
+                    // clean up drop element
+                    drop.remove();
+                });
+            }
+
+            // start autoplay drops every 800ms
+            function start() {
+                createDrop();
+                intervalId = setInterval(createDrop, 800);
+            }
+
+            // start on load
+            window.addEventListener('load', start);
+        })();
+    </script>
+</body>
+</html>

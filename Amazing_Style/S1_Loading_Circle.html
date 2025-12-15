@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Loading circle</title>
+        <link rel="stylesheet" href="../output.css">
+        <script src="https://cdn.tailwindcss.com"></script>
+</head>
+        <!--
+            This file contains simple Tailwind loading-circle examples.
+            If you already build Tailwind locally, you can remove the CDN script above.
+        -->
+        <style>
+            @keyframes spin360 { to { transform: rotate(360deg); } }
+            .spin-once { animation: spin360 1s ease-in-out 1 both; }
+            .spin-interval { animation: spin360 0.8s linear 1; }
+        </style>
+</head>
+</head>
+<body class="min-h-screen bg-gray-50 flex items-center justify-center">
+    <div class="space-y-6 text-center p-6">
+        <!-- Continuous autoplay (infinite) -->
+        <div class="flex items-center justify-center gap-4">
+            <div role="status" aria-label="Loading" class="w-16 h-16 border-4 border-white border-t-blue-500 rounded-full animate-spin"></div>
+            <div class="text-lg font-medium text-gray-700">Continuous spin (infinite)</div>
+        </div>
+
+        <!-- Single 360deg on page load -->
+        <div class="flex items-center justify-center gap-4">
+            <div role="status" aria-label="Spin once on load" class="w-16 h-16 border-4 border-white border-t-yellow-500 rounded-full spin-once" aria-hidden="true"></div>
+            <div class="text-lg font-medium text-gray-700">Spin once on load</div>
+        </div>
+
+        <!-- Repeating autoplay: spins 360 every 2 seconds -->
+        <div class="flex items-center justify-center gap-4">
+            <div id="interval-spinner" role="status" aria-label="Auto spin every 2s" class="w-16 h-16 border-4 border-white border-t-green-500 rounded-full" aria-hidden="true"></div>
+            <div class="text-lg font-medium text-gray-700">Autoplay: 360° every 2s</div>
+        </div>
+
+        <p class="text-sm text-gray-500">Tailwind loading circle examples — copy the loader divs where needed.</p>
+    </div>
+
+    <script>
+        // Retrigger a single 360deg animation every 2 seconds on the interval spinner
+        window.addEventListener('load', () => {
+            const el = document.getElementById('interval-spinner');
+            // initial trigger
+            el.classList.add('spin-interval');
+            setInterval(() => {
+                el.classList.remove('spin-interval');
+                void el.offsetWidth; // force reflow to restart animation
+                el.classList.add('spin-interval');
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
