@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+@theme {
+    --padding-1:100px;
+    --margin-1:50px;
+    --background-color-1:#f0f0f0;
+    --width-1:200px;
+    --height-1:100px;
+}
