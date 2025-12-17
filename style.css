@@ -1,9 +1,53 @@
 @import "tailwindcss";
 
-@theme {
-    --padding-1:100px;
-    --margin-1:50px;
-    --background-color-1:#f0f0f0;
-    --width-1:200px;
-    --height-1:100px;
+/* @theme {
+  --padding-1: 100px;
+  --margin-1: 50px;
+  --background-color-1: #f0f0f0;
+  --width-1: 200px;
+  --height-1: 100px;
+} */
+
+@layer components {
+  .btn-light {
+    @apply border bg-white rounded px-5 py-1.5 
+           hover:bg-slate-200 hover:text-white 
+          focus:text-white ;
+  }
+  .btn-primary {
+    @apply border bg-blue-500 rounded px-5 py-1.5 
+           hover:bg-blue-700 hover:text-white 
+           focus:bg-blue-500 focus:text-white 
+           focus:outline-none focus:ring-2 focus:ring-blue-300;
+  }
+  .btn-warning {
+    @apply border bg-yellow-400 rounded px-5 py-1.5 
+           hover:bg-yellow-600 hover:text-white 
+           focus:bg-yellow-500 focus:text-white 
+           focus:outline-none focus:ring-2 focus:ring-yellow-300;
+  } 
+  .btn-success {
+    @apply border bg-green-500 rounded px-5 py-1.5 
+           hover:bg-green-700 hover:text-white 
+           focus:bg-green-500 focus:text-white 
+           focus:outline-none focus:ring-2 focus:ring-green-300;
+  } 
+  .btn-danger {
+    @apply border bg-red-500 rounded px-5 py-1.5 
+           hover:bg-red-700 hover:text-white 
+           focus:bg-red-500 focus:text-white 
+           focus:outline-none focus:ring-2 focus:ring-red-300;
+  } 
+  .btn-dark {
+    @apply border bg-gray-800 rounded px-5 py-1.5 
+           hover:bg-gray-900 hover:text-white 
+           focus:bg-gray-700 focus:text-white 
+           focus:outline-none focus:ring-2 focus:ring-gray-300;
+  } 
+  .btn-info {
+    @apply border bg-yellow-400 rounded px-5 py-1.5 
+           hover:bg-yellow-600 hover:text-white 
+           focus:bg-yellow-500 focus:text-white 
+           focus:outline-none focus:ring-2 focus:ring-yellow-300;
+  } 
 }
