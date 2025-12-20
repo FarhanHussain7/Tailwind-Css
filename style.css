@@ -1,12 +1,14 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=BBH+Bogle&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* @theme {
+@theme {
   --padding-1: 100px;
   --margin-1: 50px;
   --background-color-1: #f0f0f0;
   --width-1: 200px;
   --height-1: 100px;
-} */
+  --font-roboto: 'Roboto', cursive;
+}
 
 
 /* ===================  16 Directives ======================================== */
@@ -76,3 +78,4 @@
 .image_gallary{
   @apply w-96 border-4 border-lime-300 hover:bg-lime-200 hover:scale-110 transition duration-1000 ease-in-out hover:brightness-125;
 }
+
